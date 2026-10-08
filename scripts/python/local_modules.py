@@ -30,7 +30,7 @@ from manifest_overlay import (
 )
 from module_detect import detect
 from modules import build_state, load_env_file, parse_bool
-from update_module_manifest import repo_name_to_key
+from update_module_manifest import load_name_overrides, repo_name_to_key, resolve_module_name
 
 GIT_TIMEOUT_SECONDS = 600
 
@@ -303,9 +303,11 @@ def cmd_add(args: argparse.Namespace, paths: Paths) -> int:
         raise Refused(f"{args.url} is already {where} as {same_repo['key']}; "
                       f"enable it with {same_repo['key']}=1 in .env")
 
-    name = repo_basename(args.url)
+    raw_name = repo_basename(args.url)
+    _check_name(raw_name, args.url)
+    name = resolve_module_name(raw_name, overrides=load_name_overrides())
     _check_name(name, args.url)
-    key = args.key or tombstone_key or repo_name_to_key(name)
+    key = args.key or tombstone_key or repo_name_to_key(raw_name)
     _check_key(key)
     if key in by_key and is_tombstone(by_key[key]):
         drop_tombstone(key)

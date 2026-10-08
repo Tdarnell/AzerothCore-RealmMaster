@@ -55,6 +55,81 @@ CATEGORY_BY_TYPE = {
     "cpp": "uncategorized",
 }
 USER_AGENT = "azerothcore-realmmaster-module-manifest"
+DEFAULT_OVERRIDES_PATH = "config/module-name-overrides.json"
+
+
+def load_name_overrides(path: Optional[str] = None) -> Dict[str, str]:
+    """Load module name overrides from JSON file if present."""
+    target = path or DEFAULT_OVERRIDES_PATH
+    if not os.path.exists(target):
+        return {}
+    try:
+        with open(target, "r", encoding="utf-8") as handle:
+            data = json.load(handle)
+        if isinstance(data, dict):
+            return data
+    except Exception as exc:
+        print(f"Warning: Failed to load module name overrides from {target}: {exc}", file=sys.stderr)
+    return {}
+
+
+def resolve_module_name(
+    repo_name: str,
+    module_type: str = "cpp",
+    overrides: Optional[Dict[str, str]] = None,
+) -> str:
+    """Resolve destination folder name for a module given its repository name.
+
+    Applies explicit overrides from config/module-name-overrides.json, and normalizes
+    C++ modules prefixed with 'wow-mod-' to 'mod-'.
+    """
+    if overrides and repo_name in overrides:
+        return overrides[repo_name]
+    # General rule: buildthehomelab and other wow-mod-* C++ modules expect mod-* folder names
+    if module_type == "cpp" and repo_name.startswith("wow-mod-"):
+        return repo_name[4:]
+    return repo_name
+
+
+def apply_name_overrides(
+    manifest: Dict[str, List[dict]],
+    overrides: Optional[Dict[str, str]] = None,
+) -> int:
+    """Normalize and override module folder names in the manifest.
+
+    Returns the number of entries whose names were updated.
+    """
+    modules = manifest.get("modules", [])
+    updated_count = 0
+    for entry in modules:
+        repo_url = str(entry.get("repo", ""))
+        repo_name = repo_url.rstrip("/").split("/")[-1]
+        if repo_name.endswith(".git"):
+            repo_name = repo_name[:-4]
+        current_name = entry.get("name", "")
+        module_type = str(entry.get("type", "cpp"))
+
+        # 1. Check explicit override by repo_name, current_name, or key
+        target_name = None
+        if overrides:
+            target_name = (
+                overrides.get(repo_name)
+                or overrides.get(current_name)
+                or overrides.get(str(entry.get("key", "")))
+            )
+
+        # 2. Pattern-based normalization for C++ modules
+        if not target_name and module_type == "cpp":
+            if repo_name.startswith("wow-mod-"):
+                target_name = repo_name[4:]
+            elif current_name.startswith("wow-mod-"):
+                target_name = current_name[4:]
+
+        if target_name and target_name != current_name:
+            entry["name"] = target_name
+            updated_count += 1
+    return updated_count
+
 
 
 def parse_args(argv: Sequence[str]) -> argparse.Namespace:
@@ -132,6 +207,16 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
             "Abort pruning if the confirmed-dead entries exceed this fraction of the "
             "manifest (default: %(default)s)"
         ),
+    )
+    parser.add_argument(
+        "--overrides",
+        default=DEFAULT_OVERRIDES_PATH,
+        help="Path to JSON file containing module name overrides (default: %(default)s)",
+    )
+    parser.add_argument(
+        "--apply-overrides",
+        action="store_true",
+        help="Apply name overrides to existing manifest without querying GitHub API",
     )
     return parser.parse_args(argv)
 
@@ -455,11 +540,22 @@ def update_last_modified(entry: dict, repo: dict) -> None:
         entry["last_modified"] = pushed_at
 
 
-def update_entry_from_repo(entry: dict, repo: dict, repo_type: str, topic_expr: str, refresh: bool) -> None:
+def update_entry_from_repo(
+    entry: dict,
+    repo: dict,
+    repo_type: str,
+    topic_expr: str,
+    refresh: bool,
+    overrides: Optional[Dict[str, str]] = None,
+) -> None:
     update_last_modified(entry, repo)
+    repo_name = repo.get("name") or entry.get("name", "")
+    target_name = resolve_module_name(repo_name, repo_type, overrides)
     # Only overwrite descriptive fields when refresh is enabled or when they are missing.
     if refresh or not entry.get("name"):
-        entry["name"] = repo.get("name") or entry.get("name")
+        entry["name"] = target_name or entry.get("name")
+    elif entry.get("name") and target_name and entry.get("name") != target_name and overrides and repo_name in overrides:
+        entry["name"] = target_name
     if refresh or not entry.get("repo"):
         entry["repo"] = repo.get("clone_url") or repo.get("html_url", entry.get("repo"))
     if refresh or not entry.get("description"):
@@ -479,6 +575,7 @@ def merge_repositories(
     manifest: Dict[str, List[dict]],
     repos: Iterable[RepoRecord],
     refresh_existing: bool,
+    overrides: Optional[Dict[str, str]] = None,
 ) -> tuple[int, int]:
     modules = manifest.setdefault("modules", [])
     by_key = {module.get("key"): module for module in modules if module.get("key")}
@@ -500,7 +597,7 @@ def merge_repositories(
         if not existing:
             existing = {
                 "key": key,
-                "name": repo.get("name", key),
+                "name": resolve_module_name(repo.get("name", key), record.module_type, overrides),
                 "repo": repo.get("clone_url") or repo.get("html_url", ""),
                 "description": repo.get("description") or "",
                 "type": record.module_type,
@@ -515,7 +612,7 @@ def merge_repositories(
             added += 1
         else:
             updated += 1
-        update_entry_from_repo(existing, repo, record.module_type, record.topic_expr, refresh_existing)
+        update_entry_from_repo(existing, repo, record.module_type, record.topic_expr, refresh_existing, overrides)
 
     return added, updated
 
@@ -657,13 +754,30 @@ def update_env_template(manifest_path: str, template_path: str) -> bool:
 
 def main(argv: Sequence[str]) -> int:
     args = parse_args(argv)
+    manifest = load_manifest(args.manifest)
+    overrides = load_name_overrides(args.overrides)
+
+    if args.apply_overrides:
+        overrides_applied = apply_name_overrides(manifest, overrides)
+        if args.dry_run:
+            print(f"[dry-run] Would apply name overrides to {overrides_applied} module(s) in {args.manifest}")
+            return 0
+        with open(args.manifest, "w", encoding="utf-8") as handle:
+            json.dump(manifest, handle, indent=2)
+            handle.write("\n")
+        print(f"✅ Applied name overrides to {overrides_applied} module(s) in {args.manifest}")
+        if not args.skip_template:
+            template_updated = update_env_template(args.manifest, args.update_template)
+            if template_updated:
+                print(f"Updated {args.update_template} with active modules only")
+        return 0
+
     topics = args.topics or DEFAULT_TOPICS
     token = args.token or os.environ.get("GITHUB_TOKEN") or os.environ.get("GITHUB_API_TOKEN")
     client = GitHubClient(token, verbose=args.log)
 
-    manifest = load_manifest(args.manifest)
     repos = collect_repositories(client, topics, args.max_pages)
-    added, updated = merge_repositories(manifest, repos, args.refresh_existing)
+    added, updated = merge_repositories(manifest, repos, args.refresh_existing, overrides=overrides)
 
     removed: List[dict] = []
     if args.prune_missing:
@@ -683,6 +797,11 @@ def main(argv: Sequence[str]) -> int:
             verbose=args.log,
         )
 
+    # Always ensure overrides are enforced across all modules in the manifest
+    overrides_applied = apply_name_overrides(manifest, overrides)
+    if overrides_applied and args.log:
+        print(f"Applied name overrides to {overrides_applied} module(s)")
+
     valid_keys = {
         str(entry.get("key")) for entry in manifest.get("modules", []) if entry.get("key")
     }
@@ -692,7 +811,7 @@ def main(argv: Sequence[str]) -> int:
             prune_profiles(args.profiles_dir, valid_keys, dry_run=True, verbose=args.log)
         print(
             f"Discovered {len(repos)} repositories "
-            f"(added={added}, updated={updated}, would remove={len(removed)})"
+            f"(added={added}, updated={updated}, would remove={len(removed)}, overrides={overrides_applied})"
         )
         return 0
 
@@ -702,7 +821,7 @@ def main(argv: Sequence[str]) -> int:
 
     print(
         f"Updated manifest {args.manifest}: added {added}, refreshed {updated}, "
-        f"removed {len(removed)}"
+        f"removed {len(removed)}, overrides applied {overrides_applied}"
     )
 
     # Keep profiles free of keys the manifest no longer has; the config UI's

@@ -9750,7 +9750,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_ACCOUNTWIDE_PETS",
-      "name": "wow-mod-accountwide-pets",
+      "name": "mod-accountwide-pets",
       "repo": "https://github.com/buildthehomelab/wow-mod-accountwide-pets.git",
       "description": "AzerothCore module: share companion pets between all characters on an account (pets-only split of mod-accountwide)",
       "type": "cpp",
@@ -9765,7 +9765,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_ACCOUNTWIDE_MOUNTS",
-      "name": "wow-mod-accountwide-mounts",
+      "name": "mod-accountwide-mounts",
       "repo": "https://github.com/buildthehomelab/wow-mod-accountwide-mounts.git",
       "description": "AzerothCore module: share mounts between all characters on an account (mounts-only split of mod-accountwide)",
       "type": "cpp",
@@ -9825,7 +9825,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_SERVER_MAIL",
-      "name": "wow-mod-server-mail",
+      "name": "mod-server-mail",
       "repo": "https://github.com/buildthehomelab/wow-mod-server-mail.git",
       "description": "AzerothCore module + WoW 3.3.5a GM addon: mail items, rare mounts, pets and gold to players from \"Blizzard Services\"",
       "type": "cpp",
@@ -10590,7 +10590,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_RAID_CLEAR",
-      "name": "wow-mod-raid-clear",
+      "name": "mod-raid-clear",
       "repo": "https://github.com/buildthehomelab/wow-mod-raid-clear.git",
       "description": "AzerothCore module: per-raid boss and trash mechanics for mod-playerbots bot raids (Molten Core, Blackwing Lair)",
       "type": "cpp",
@@ -10605,7 +10605,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_RAID_BWL",
-      "name": "wow-mod-raid-bwl",
+      "name": "mod-raid-bwl",
       "repo": "https://github.com/buildthehomelab/wow-mod-raid-bwl.git",
       "description": "AzerothCore module: Blackwing Lair encounter fixes (disarmed Suppression Devices keep casting)",
       "type": "cpp",
@@ -10620,7 +10620,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_FOREVER_DUNGEON_XP",
-      "name": "wow-mod-forever-dungeon-xp",
+      "name": "mod-forever-dungeon-xp",
       "repo": "https://github.com/buildthehomelab/wow-mod-forever-dungeon-xp.git",
       "description": "AzerothCore module: WoW Forever dungeon XP rework for 3.3.5, less XP from dungeon kills, more from one-time dungeon quests",
       "type": "cpp",
@@ -10635,7 +10635,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_FOREVER_HUNTER",
-      "name": "wow-mod-forever-hunter",
+      "name": "mod-forever-hunter",
       "repo": "https://github.com/buildthehomelab/wow-mod-forever-hunter.git",
       "description": "AzerothCore module: hunter changes for 3.3.5, starting with SoD-style pet scaling (crit, haste, focus, ability AP), no client patch",
       "type": "cpp",
@@ -10650,7 +10650,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_RAID_ONYXIA",
-      "name": "wow-mod-raid-onyxia",
+      "name": "mod-raid-onyxia",
       "repo": "https://github.com/buildthehomelab/wow-mod-raid-onyxia.git",
       "description": "AzerothCore module: caps Onyxia's air phase so bot raids don't wait forever",
       "type": "cpp",
@@ -10665,7 +10665,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_FOREVER_PALADIN",
-      "name": "wow-mod-forever-paladin",
+      "name": "mod-forever-paladin",
       "repo": "https://github.com/buildthehomelab/wow-mod-forever-paladin.git",
       "description": "AzerothCore module: WoW Forever paladin changes for 3.3.5, starting with Holy Strike for every spec, no client patch",
       "type": "cpp",
@@ -10680,7 +10680,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_RARE_TRACKER",
-      "name": "wow-mod-rare-tracker",
+      "name": "mod-rare-tracker",
       "repo": "https://github.com/buildthehomelab/wow-mod-rare-tracker.git",
       "description": "AzerothCore module: live list of open-world rares served from worldserver memory for a website rare map; keeps ungrouped playerbots off rares",
       "type": "cpp",
@@ -10695,7 +10695,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_RETAIL_AH",
-      "name": "wow-mod-retail-ah",
+      "name": "mod-retail-ah",
       "repo": "https://github.com/buildthehomelab/wow-mod-retail-ah.git",
       "description": "Retail-style auction house for AzerothCore 3.3.5a: Buy/Sell/Auctions window (RetailAH addon) backed by a server module",
       "type": "cpp",
@@ -10710,7 +10710,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_FOREVER_PERIODIC_CRIT",
-      "name": "wow-mod-forever-periodic-crit",
+      "name": "mod-forever-periodic-crit",
       "repo": "https://github.com/buildthehomelab/wow-mod-forever-periodic-crit.git",
       "description": "AzerothCore module: DoT and HoT ticks can crit, as in WoW Forever",
       "type": "cpp",
@@ -10725,7 +10725,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_FOREVER_RACIALS",
-      "name": "wow-mod-forever-racials",
+      "name": "mod-forever-racials",
       "repo": "https://github.com/buildthehomelab/wow-mod-forever-racials.git",
       "description": "AzerothCore 3.3.5 module: WoW Forever's racial rework as buffs, 2 actives + 2 passives per race",
       "type": "cpp",
@@ -10740,7 +10740,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_RETAIL_PROFESSIONS",
-      "name": "wow-mod-retail-professions",
+      "name": "mod-retail-professions",
       "repo": "https://github.com/buildthehomelab/wow-mod-retail-professions.git",
       "description": "Retail-style profession window for AzerothCore 3.3.5a: search, filters, skill-up odds, unlearned recipes and where to learn them, recipe tracker, professions book (K). Server module + RetailProfessions addon.",
       "type": "cpp",
@@ -10755,7 +10755,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_FOREVER_ROGUE",
-      "name": "wow-mod-forever-rogue",
+      "name": "mod-forever-rogue",
       "repo": "https://github.com/buildthehomelab/wow-mod-forever-rogue.git",
       "description": "AzerothCore module: WoW Forever rogue changes for 3.3.5, starting with combo points that carry over to your next target, no client patch",
       "type": "cpp",
@@ -10770,7 +10770,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_STACK_SIZE",
-      "name": "wow-mod-stack-size",
+      "name": "mod-stack-size",
       "repo": "https://github.com/buildthehomelab/wow-mod-stack-size.git",
       "description": "AzerothCore module: config-driven item stack sizes (trade goods to 999), server-side only",
       "type": "cpp",
@@ -10785,7 +10785,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_TALENT_PER_LEVEL",
-      "name": "wow-mod-talent-per-level",
+      "name": "mod-talent-per-level",
       "repo": "https://github.com/buildthehomelab/wow-mod-talent-per-level.git",
       "description": "AzerothCore module: 1 talent point per level from level 1 (80 at level 80 instead of 71)",
       "type": "cpp",
@@ -10800,7 +10800,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_TRANSMOG_PLUS",
-      "name": "wow-mod-transmog-plus",
+      "name": "mod-transmog-plus",
       "repo": "https://github.com/buildthehomelab/wow-mod-transmog-plus.git",
       "description": "Retail-style slot-based transmog for AzerothCore: account-wide collection, transmog window addon, sets, outfits, collect on loot/disenchant",
       "type": "cpp",
@@ -10815,7 +10815,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_WEATHER",
-      "name": "wow-mod-weather",
+      "name": "mod-weather",
       "repo": "https://github.com/buildthehomelab/wow-mod-weather.git",
       "description": "AzerothCore module: weather for 43 more zones, visible light weather, fog, thunderstorms, black rain and black snow",
       "type": "cpp",
@@ -10830,7 +10830,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_FOREVER_SHAMAN",
-      "name": "wow-mod-forever-shaman",
+      "name": "mod-forever-shaman",
       "repo": "https://github.com/buildthehomelab/wow-mod-forever-shaman.git",
       "description": "AzerothCore module: shaman changes for 3.3.5: Ghost Wolf follows level-scaled mount speed (mod-mount-scaling), can mine and works indoors",
       "type": "cpp",
@@ -10845,7 +10845,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_GATHERING_TOOLS",
-      "name": "wow-mod-gathering-tools",
+      "name": "mod-gathering-tools",
       "repo": "https://github.com/buildthehomelab/wow-mod-gathering-tools.git",
       "description": "AzerothCore module: Mining and Skinning without a pick or knife; carrying the tool gives +10 skill and 25% faster gathering",
       "type": "cpp",
@@ -10860,7 +10860,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_HOLIDAY_CONTROL",
-      "name": "wow-mod-holiday-control",
+      "name": "mod-holiday-control",
       "repo": "https://github.com/buildthehomelab/wow-mod-holiday-control.git",
       "description": "AzerothCore module: control holidays and world events from the config (force on/off, reschedule) and run bonus events (double XP weekends and more)",
       "type": "cpp",
@@ -10875,7 +10875,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_LEARN_SPELLS",
-      "name": "wow-mod-learn-spells",
+      "name": "mod-learn-spells",
       "repo": "https://github.com/buildthehomelab/wow-mod-learn-spells.git",
       "description": "AzerothCore module: auto-learn class spells on level-up (to 55) while keeping class-quest spells as quest rewards",
       "type": "cpp",
@@ -10890,7 +10890,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_LFG_PROGRESSION",
-      "name": "wow-mod-lfg-progression",
+      "name": "mod-lfg-progression",
       "repo": "https://github.com/buildthehomelab/wow-mod-lfg-progression.git",
       "description": "AzerothCore module: the Dungeon Finder follows mod-individual-progression (locks dungeons and randoms from eras you haven't reached)",
       "type": "cpp",
@@ -10905,7 +10905,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_NPC_FINDER",
-      "name": "wow-mod-npc-finder",
+      "name": "mod-npc-finder",
       "repo": "https://github.com/buildthehomelab/wow-mod-npc-finder.git",
       "description": "AzerothCore module: Town Guide spell and .find command to search friendly NPCs, trainers and services from the server's own spawn data, flagged on the map",
       "type": "cpp",
@@ -10935,7 +10935,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_FOREVER_DUNGEON_JOURNAL",
-      "name": "wow-mod-forever-dungeon-journal",
+      "name": "mod-forever-dungeon-journal",
       "repo": "https://github.com/buildthehomelab/wow-mod-forever-dungeon-journal.git",
       "description": "AzerothCore 3.3.5a module + addon: a retail-style Dungeon Journal (bosses, abilities, loot with drop chances, quests, lockouts) built from your realm's own data",
       "type": "cpp",
@@ -10950,7 +10950,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_RAID_LOCKOUT",
-      "name": "wow-mod-raid-lockout",
+      "name": "mod-raid-lockout",
       "repo": "https://github.com/buildthehomelab/wow-mod-raid-lockout.git",
       "description": "AzerothCore module: per-raid lockout length in days",
       "type": "cpp",
@@ -10965,7 +10965,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_PROFESSION_SPECIALIZATIONS",
-      "name": "wow-mod-profession-specializations",
+      "name": "mod-profession-specializations",
       "repo": "https://github.com/buildthehomelab/wow-mod-profession-specializations.git",
       "description": "AzerothCore module: learn every crafting profession specialization (Gnomish+Goblin Engineering, all Blacksmithing/Leatherworking/Tailoring/Alchemy specs) at the stock skill and level",
       "type": "cpp",
@@ -10980,7 +10980,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_DUNGEON_BRD",
-      "name": "wow-mod-dungeon-brd",
+      "name": "mod-dungeon-brd",
       "repo": "https://github.com/buildthehomelab/wow-mod-dungeon-brd.git",
       "description": "AzerothCore module: Blackrock Depths tweaks - 5 minute Lyceum respawns, Hand of Justice back on Angerforge, Iron Hall flame strips for Magmus",
       "type": "cpp",
@@ -10995,7 +10995,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_ERA_EVENTS",
-      "name": "wow-mod-era-events",
+      "name": "mod-era-events",
       "repo": "https://github.com/buildthehomelab/wow-mod-era-events.git",
       "description": "AzerothCore module: timed live world events per mod-individual-progression era (AQ gates, Scourge Invasion, Legion incursion, zombie plague), phased so only players of that era share them",
       "type": "cpp",
@@ -11010,7 +11010,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_DRUID_SWIPE_FISHING",
-      "name": "wow-mod-druid-swipe-fishing",
+      "name": "mod-druid-swipe-fishing",
       "repo": "https://github.com/buildthehomelab/wow-mod-druid-swipe-fishing.git",
       "description": "AzerothCore module: druids fish in Bear Form with a salmon relic - call the salmon, Swipe it when it surfaces. Quest chain from Moonglade; needs the realm client patch",
       "type": "cpp",
@@ -11025,7 +11025,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_BEAST_COLLECTION",
-      "name": "wow-mod-beast-collection",
+      "name": "mod-beast-collection",
       "repo": "https://github.com/buildthehomelab/wow-mod-beast-collection.git",
       "description": "AzerothCore module: Pok\u00e9mon-style hunter stables for 3.3.5 \u2014 unlimited pet box, a field guide of every tameable beast (finds, Beast Lore, spawn maps), shinies and rewards, with the BeastCollection addon",
       "type": "cpp",
@@ -11040,7 +11040,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_FOREVER_DRUID",
-      "name": "wow-mod-forever-druid",
+      "name": "mod-forever-druid",
       "repo": "https://github.com/buildthehomelab/wow-mod-forever-druid.git",
       "description": "AzerothCore module: WoW Forever-style druid changes: free Swipe, dodge rage, Pulverize, mount-speed forms, form consumables, Mining in forms, combo point carryover, Crowd Pummeler",
       "type": "cpp",
@@ -11055,7 +11055,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_DUNGEON_CONSUMABLES",
-      "name": "wow-mod-dungeon-consumables",
+      "name": "mod-dungeon-consumables",
       "repo": "https://github.com/buildthehomelab/wow-mod-dungeon-consumables.git",
       "description": "AzerothCore module: Delver's Draughts handed out on dungeon entry (50% health and mana over 10s), removed on leaving; bots skipped",
       "type": "cpp",
@@ -11070,7 +11070,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_BOT_LFG_ACCEPT",
-      "name": "wow-mod-bot-lfg-accept",
+      "name": "mod-bot-lfg-accept",
       "repo": "https://github.com/buildthehomelab/wow-mod-bot-lfg-accept.git",
       "description": "AzerothCore module: playerbots always accept the Dungeon Finder ready check and get pulled into the dungeon",
       "type": "cpp",
@@ -11085,7 +11085,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_COMBAT_WATCHDOG",
-      "name": "wow-mod-combat-watchdog",
+      "name": "mod-combat-watchdog",
       "repo": "https://github.com/buildthehomelab/wow-mod-combat-watchdog.git",
       "description": "AzerothCore module: releases players and bots from combat with creatures that stopped fighting (stuck-in-combat fix for dungeons)",
       "type": "cpp",
@@ -11115,7 +11115,7 @@
     },
     {
       "key": "MODULE_WOW_MOD_ACCOUNTWIDE_FLIGHT_PATHS",
-      "name": "wow-mod-accountwide-flight-paths",
+      "name": "mod-accountwide-flight-paths",
       "repo": "https://github.com/buildthehomelab/wow-mod-accountwide-flight-paths.git",
       "description": "AzerothCore module: share discovered flight paths between the characters on an account",
       "type": "cpp",

@@ -75,9 +75,17 @@ def _detect_cpp(root: Path, folder_name: str) -> Detection:
     expected = f"Add{folder_name.replace('-', '_')}Scripts"
     found = sorted(set(_LOADER_RE.findall(text)))
     if expected not in found:
+        matching_loaders = [
+            f for f in found
+            if f.startswith("Addmod_") or (f.startswith("Add") and f.endswith("Scripts") and f != expected)
+        ]
+        suggestion = ""
+        if matching_loaders:
+            suggested_dir = re.sub(r"^Add(.*)Scripts$", r"\1", matching_loaders[0]).replace("_", "-")
+            suggestion = f" (expected folder name may be '{suggested_dir}')"
         detection.warnings.append(
             f"AzerothCore will call {expected}() for folder '{folder_name}', "
-            f"but src/ defines {', '.join(found) if found else 'no Add...Scripts() function'}; "
+            f"but src/ defines {', '.join(found) if found else 'no Add...Scripts() function'}{suggestion}; "
             "the build may fail to link"
         )
     if "Playerbots.h" in text or "PlayerbotAI" in text:
